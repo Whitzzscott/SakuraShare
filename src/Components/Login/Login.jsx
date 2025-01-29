@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import '../css/style.css';
 import 'animate.css';
-import { useNavigate } from 'react-router-dom';
-import { ServerAPI } from "../../Config/ServerAPI.js";
+import { Link } from 'react-router-dom';
+import ServerAPI from "../../Config/ServerAPI.js";
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +19,7 @@ const Login = () => {
     }
 
     try {
-      const loginResponse = await fetch(`${ServerAPI.login}/login`, {
+      const response = await fetch(`${ServerAPI.BaseURL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,31 +27,19 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
 
-      if (!loginResponse.ok) {
+      if (!response.ok) {
         throw new Error('Login failed');
       }
 
-      const loginData = await loginResponse.json();
-      console.log('Login success:', loginData);
-      
-      const idResponse = await fetch(`${ServerAPI.login}/Id`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const idData = await idResponse.json();
-      console.log('Id Response:', idData);
-
-      if (idData.message === 'User: Session Active') {
-        navigate('/home'); // Redirect to Home if session is active
-      } else {
-        console.warn('Session is not active, but redirecting to Home.');
-        navigate('/home'); // Redirect anyway
+      const data = await response.json();
+      if (data.username) {
+        localStorage.setItem("username", data.username);
       }
+
+      window.location.href = "/home";
+
     } catch (error) {
-      console.error('Error:', error);
+      console.error(error);
     }
   };
 
@@ -101,9 +88,9 @@ const Login = () => {
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
             Not yet registered? 
-            <a href="/register" className="text-purple-600 font-semibold hover:text-purple-700 transition duration-200">
+            <Link to="/register" className="text-purple-600 font-semibold hover:text-purple-700 transition duration-200">
               Register here
-            </a>
+            </Link>
           </p>
         </div>
       </div>

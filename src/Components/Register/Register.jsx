@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/style.css';
 import 'animate.css';
-import { ServerAPI } from "../../Config/ServerAPI.js";
+import ServerAPI from "../../Config/ServerAPI.js";
+
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +26,7 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch(`${ServerAPI.login}/register`, {
+      const response = await fetch(`${ServerAPI.BaseURL}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,6 +40,8 @@ const Register = () => {
 
       const data = await response.json();
       console.log(data);
+
+      navigate('/login');
     } catch (error) {
       console.error(error);
     }

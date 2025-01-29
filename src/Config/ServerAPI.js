@@ -1,3 +1,5 @@
-export const ServerAPI = { 
-  "login": "https://cloudflare-worker-4q02.onrender.com",
+const ServerAPI = { 
+  "BaseURL": "https://sakurashareserver-production.up.railway.app",
 };
+
+export default ServerAPI;
