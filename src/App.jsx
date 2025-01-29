@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"; 
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Preview from "./components/Home/Preview/Preview.jsx";
-import Login from "./components/Login/Login.jsx";
-import Register from "./components/Register/Register.jsx";
-import Home from "./components/Home/Home.jsx";
+import Preview from "./Components/Home/Preview/Preview.jsx";
+import Login from "./Components/Login/Login.jsx";
+import Register from "./Components/Register/Register.jsx";
+import Home from "./Components/Home/Home.jsx";
 import NotFound from "./Components/NotFound/NotFound.jsx"; 
 import ServerAPI from "./Config/ServerAPI";
 import Setting from "./Components/Home/Setting/Settings.jsx";
