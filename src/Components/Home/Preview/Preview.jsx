@@ -1,5 +1,5 @@
 import React from 'react';
-import PreviewHeader from '../PreviewHeader/PreviewHeader';
+import PreviewHeader from '../PreviewHeader/PreviewHeader.jsx';
 import backgroundImage from '../../../assets/Background.png';
 
 const Preview = () => {
